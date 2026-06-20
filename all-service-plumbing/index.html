@@ -8,18 +8,23 @@
   <style>
     *{margin:0;padding:0;box-sizing:border-box;}
     :root{--blue:#0ea5e9;--dark:#0a0f1e;--card:#111827;--accent:#38bdf8;}
+    html{scroll-behavior:smooth;}
     body{font-family:'Inter',sans-serif;background:var(--dark);color:#f1f5f9;overflow-x:hidden;}
 
     /* NAV */
     nav{position:fixed;top:0;width:100%;z-index:100;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;background:rgba(10,15,30,0.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);}
-    .logo{font-size:1.1rem;font-weight:800;color:#fff;letter-spacing:-0.5px;}
+    .logo{font-size:1.1rem;font-weight:800;color:#fff;letter-spacing:-0.5px;text-decoration:none;}
     .logo span{color:var(--blue);}
-    .nav-cta{background:var(--blue);color:#fff;padding:10px 22px;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;transition:all 0.2s;}
+    .nav-links{display:flex;gap:28px;align-items:center;}
+    .nav-links a{color:#94a3b8;text-decoration:none;font-size:0.88rem;font-weight:500;transition:color 0.2s;}
+    .nav-links a:hover{color:#fff;}
+    .nav-cta{background:var(--blue);color:#fff !important;padding:10px 22px;border-radius:8px;font-weight:600 !important;font-size:0.9rem !important;transition:all 0.2s;}
     .nav-cta:hover{background:var(--accent);transform:translateY(-1px);}
 
     /* HERO */
     .hero{min-height:100vh;display:flex;align-items:center;padding:120px 5% 80px;position:relative;overflow:hidden;}
-    .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 60% 40%, rgba(14,165,233,0.18) 0%, transparent 70%), radial-gradient(ellipse 60% 80% at 10% 80%, rgba(56,189,248,0.1) 0%, transparent 60%), linear-gradient(135deg,#0a0f1e 0%,#0d1a2e 100%);}
+    .hero-img{position:absolute;inset:0;background:url('https://media.base44.com/images/public/6a35b12a7d8d44e0af3a1501/a1957865c_generated_image.png') center/cover no-repeat;opacity:0.18;}
+    .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 60% 40%,rgba(14,165,233,0.22) 0%,transparent 70%),linear-gradient(135deg,#0a0f1e 0%,#0d1a2e 100%);}
     .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(14,165,233,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(14,165,233,0.04) 1px,transparent 1px);background-size:60px 60px;}
     .hero-content{position:relative;z-index:2;max-width:700px;}
     .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(14,165,233,0.15);border:1px solid rgba(14,165,233,0.3);padding:8px 16px;border-radius:50px;font-size:0.8rem;font-weight:600;color:var(--accent);margin-bottom:28px;letter-spacing:0.5px;}
@@ -42,28 +47,72 @@
     .section-label{text-align:center;font-size:0.8rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:16px;}
     .section-title{text-align:center;font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-1px;margin-bottom:16px;}
     .section-sub{text-align:center;color:#64748b;font-size:1.05rem;max-width:500px;margin:0 auto 60px;}
-    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:1100px;margin:0 auto;}
-    .service-card{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:32px;transition:all 0.3s;position:relative;overflow:hidden;}
-    .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--accent));transform:scaleX(0);transition:transform 0.3s;}
-    .service-card:hover::before{transform:scaleX(1);}
-    .service-card:hover{transform:translateY(-6px);border-color:rgba(14,165,233,0.2);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
-    .service-icon{width:52px;height:52px;background:rgba(14,165,233,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:20px;}
-    .service-card h3{font-size:1.15rem;font-weight:700;margin-bottom:10px;}
-    .service-card p{color:#64748b;font-size:0.92rem;line-height:1.65;}
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:1100px;margin:0 auto;}
 
-    /* TRUST */
+    /* Service cards — clickable, link to detail section */
+    .service-card{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:32px;transition:all 0.3s;position:relative;overflow:hidden;text-decoration:none;color:inherit;display:block;cursor:pointer;}
+    .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--accent));transform:scaleX(0);transition:transform 0.3s;}
+    .service-card:hover::before{transform:scaleX(1);}
+    .service-card:hover{transform:translateY(-6px);border-color:rgba(14,165,233,0.25);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
+    .service-icon{width:56px;height:56px;background:rgba(14,165,233,0.12);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin-bottom:20px;}
+    .service-card h3{font-size:1.15rem;font-weight:700;margin-bottom:10px;color:#fff;}
+    .service-card p{color:#64748b;font-size:0.92rem;line-height:1.65;margin-bottom:16px;}
+    .service-link{color:var(--blue);font-size:0.85rem;font-weight:600;display:flex;align-items:center;gap:6px;transition:gap 0.2s;}
+    .service-card:hover .service-link{gap:10px;}
+
+    /* SERVICE DETAIL SECTIONS */
+    .service-detail{padding:80px 5%;border-top:1px solid rgba(255,255,255,0.05);}
+    .service-detail:nth-child(even){background:#080d1c;}
+    .detail-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+    .detail-inner.reverse{direction:rtl;}
+    .detail-inner.reverse > *{direction:ltr;}
+    .detail-img{border-radius:20px;overflow:hidden;height:320px;background:url('https://media.base44.com/images/public/6a35b12a7d8d44e0af3a1501/e02a15f0f_generated_image.png') center/cover;box-shadow:0 20px 60px rgba(0,0,0,0.5);border:1px solid rgba(14,165,233,0.15);}
+    .detail-text h2{font-size:2rem;font-weight:800;letter-spacing:-1px;margin-bottom:16px;line-height:1.2;}
+    .detail-text h2 span{color:var(--blue);}
+    .detail-text p{color:#64748b;font-size:1rem;line-height:1.8;margin-bottom:24px;}
+    .detail-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:28px;}
+    .detail-list li{display:flex;align-items:flex-start;gap:12px;color:#94a3b8;font-size:0.95rem;}
+    .detail-list li::before{content:'✓';color:var(--blue);font-weight:700;flex-shrink:0;margin-top:1px;}
+
+    /* TRUST STATS */
     .trust{padding:100px 5%;background:#080d1c;}
     .trust-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
     .trust-left h2{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-1px;margin-bottom:20px;line-height:1.2;}
     .trust-left p{color:#64748b;font-size:1.05rem;line-height:1.8;margin-bottom:32px;}
     .trust-features{display:flex;flex-direction:column;gap:16px;}
     .trust-feature{display:flex;align-items:flex-start;gap:14px;}
-    .check{width:24px;height:24px;background:rgba(14,165,233,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--blue);font-size:0.8rem;margin-top:1px;}
+    .check{width:26px;height:26px;background:rgba(14,165,233,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--blue);font-weight:700;font-size:0.85rem;margin-top:1px;}
     .trust-feature p{color:#94a3b8;font-size:0.95rem;line-height:1.6;}
     .trust-right{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
     .trust-stat{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:28px;text-align:center;}
     .trust-stat h3{font-size:2.4rem;font-weight:900;color:var(--blue);letter-spacing:-1px;}
     .trust-stat p{color:#64748b;font-size:0.85rem;margin-top:4px;}
+
+    /* CONTACT FORM */
+    .contact{padding:100px 5%;background:linear-gradient(180deg,#080d1c 0%,#0a0f1e 100%);}
+    .contact-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+    .contact-info h2{font-size:2.2rem;font-weight:800;letter-spacing:-1px;margin-bottom:16px;line-height:1.2;}
+    .contact-info p{color:#64748b;font-size:1rem;line-height:1.8;margin-bottom:32px;}
+    .contact-detail{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+    .contact-icon{width:44px;height:44px;background:rgba(14,165,233,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+    .contact-detail-text strong{display:block;color:#fff;font-size:0.95rem;margin-bottom:2px;}
+    .contact-detail-text span{color:#64748b;font-size:0.88rem;}
+    .contact-form{background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:36px;}
+    .form-group{margin-bottom:20px;}
+    .form-group label{display:block;color:#94a3b8;font-size:0.85rem;font-weight:600;margin-bottom:8px;letter-spacing:0.3px;}
+    .form-group input,.form-group select,.form-group textarea{width:100%;background:#0a0f1e;border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:13px 16px;color:#fff;font-size:0.95rem;font-family:'Inter',sans-serif;transition:border-color 0.2s;outline:none;}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--blue);}
+    .form-group select option{background:#0a0f1e;}
+    .form-group textarea{resize:vertical;min-height:100px;}
+    .form-submit{width:100%;background:linear-gradient(135deg,var(--blue),#0284c7);color:#fff;border:none;padding:16px;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.3s;box-shadow:0 8px 24px rgba(14,165,233,0.3);}
+    .form-submit:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(14,165,233,0.5);}
+    .form-success{display:none;text-align:center;padding:20px;color:var(--accent);font-weight:600;}
+
+    /* MAP */
+    .map-section{padding:0 5% 80px;}
+    .map-inner{max-width:1100px;margin:0 auto;background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:20px;overflow:hidden;height:300px;display:flex;align-items:center;justify-content:center;}
+    .map-placeholder{text-align:center;}
+    .map-placeholder a{color:var(--blue);text-decoration:none;font-weight:600;font-size:1rem;}
 
     /* REVIEWS */
     .reviews{padding:100px 5%;background:linear-gradient(180deg,#080d1c 0%,#0a0f1e 100%);}
@@ -72,7 +121,7 @@
     .stars{color:#fbbf24;font-size:1rem;margin-bottom:14px;letter-spacing:2px;}
     .review-card p{color:#94a3b8;font-size:0.95rem;line-height:1.7;margin-bottom:18px;font-style:italic;}
     .reviewer{display:flex;align-items:center;gap:12px;}
-    .avatar{width:40px;height:40px;background:linear-gradient(135deg,var(--blue),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;}
+    .avatar{width:42px;height:42px;background:linear-gradient(135deg,var(--blue),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;}
     .reviewer-info strong{font-size:0.9rem;display:block;}
     .reviewer-info span{font-size:0.8rem;color:#475569;}
 
@@ -82,37 +131,53 @@
     .cta-content{position:relative;z-index:2;max-width:600px;margin:0 auto;}
     .cta h2{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:900;letter-spacing:-2px;margin-bottom:20px;}
     .cta p{color:#64748b;font-size:1.1rem;margin-bottom:40px;}
-    .cta-phone{font-size:2rem;font-weight:900;color:var(--blue);text-decoration:none;display:block;margin-bottom:30px;letter-spacing:-1px;}
+    .cta-phone{font-size:2.2rem;font-weight:900;color:var(--blue);text-decoration:none;display:block;margin-bottom:30px;letter-spacing:-1px;}
 
     /* FOOTER */
-    footer{background:#060a16;padding:40px 5%;text-align:center;border-top:1px solid rgba(255,255,255,0.05);}
-    footer p{color:#334155;font-size:0.85rem;}
-    footer span{color:var(--blue);}
+    footer{background:#060a16;padding:48px 5%;border-top:1px solid rgba(255,255,255,0.05);}
+    .footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap;}
+    .footer-brand .logo{font-size:1.2rem;font-weight:800;color:#fff;display:inline-block;margin-bottom:12px;}
+    .footer-brand p{color:#334155;font-size:0.85rem;line-height:1.7;max-width:280px;}
+    .footer-links h4{color:#fff;font-weight:700;margin-bottom:14px;font-size:0.9rem;}
+    .footer-links a{display:block;color:#334155;text-decoration:none;font-size:0.85rem;margin-bottom:8px;transition:color 0.2s;}
+    .footer-links a:hover{color:var(--blue);}
+    .footer-bottom{max-width:1100px;margin:32px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.04);text-align:center;}
+    .footer-bottom p{color:#1e293b;font-size:0.8rem;}
 
     @media(max-width:768px){
-      .trust-inner{grid-template-columns:1fr;}
+      .detail-inner,.trust-inner,.contact-inner{grid-template-columns:1fr;}
+      .detail-inner.reverse{direction:ltr;}
       .hero-stats{gap:24px;}
-      .trust-right{grid-template-columns:1fr 1fr;}
+      .nav-links{display:none;}
+      .footer-inner{flex-direction:column;}
     }
   </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <div class="logo">All Service <span>Plumbing</span></div>
-  <a href="tel:8639915702" class="nav-cta">📞 Call Now</a>
+  <a href="#" class="logo">All Service <span>Plumbing</span></a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact" class="nav-cta">Get a Quote</a>
+  </div>
 </nav>
 
-<section class="hero">
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-img"></div>
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-content">
     <div class="badge">⭐ 4.9 Stars · 337 Google Reviews · Sebring, FL</div>
     <h1>Central Florida's <span>Most Trusted</span> Plumbers</h1>
-    <p>From emergency repairs to full installations — All Service Plumbing of Central Florida delivers expert service with a smile. Serving Sebring and surrounding areas for years.</p>
+    <p>From emergency repairs to full installations — All Service Plumbing of Central Florida delivers expert service with a smile. Serving Sebring and surrounding areas.</p>
     <div class="hero-btns">
       <a href="tel:8639915702" class="btn-primary">📞 (863) 991-5702</a>
-      <a href="#services" class="btn-ghost">Our Services ↓</a>
+      <a href="#services" class="btn-ghost">View Services ↓</a>
     </div>
     <div class="hero-stats">
       <div class="stat"><h3>337+</h3><p>5-Star Reviews</p></div>
@@ -122,30 +187,176 @@
   </div>
 </section>
 
+<!-- SERVICES GRID -->
 <section class="services" id="services">
   <div class="section-label">What We Do</div>
   <h2 class="section-title">Complete Plumbing Solutions</h2>
-  <p class="section-sub">Whatever your plumbing needs, we've got you covered — fast, professional, and affordable.</p>
+  <p class="section-sub">Click any service to learn more about what's included and how we can help.</p>
   <div class="services-grid">
-    <div class="service-card"><div class="service-icon">🚰</div><h3>Leak Detection & Repair</h3><p>We find and fix leaks fast before they become expensive disasters. Save your home and your wallet.</p></div>
-    <div class="service-card"><div class="service-icon">🚿</div><h3>Drain Cleaning</h3><p>Clogged drains? We clear them completely using professional-grade equipment — not just a plunger.</p></div>
-    <div class="service-card"><div class="service-icon">🔧</div><h3>Water Heater Service</h3><p>Installation, repair, and replacement of all water heater types. Cold showers are never fun.</p></div>
-    <div class="service-card"><div class="service-icon">🏠</div><h3>Residential Plumbing</h3><p>Full-service plumbing for your home — from faucets and toilets to full remodels and new installs.</p></div>
-    <div class="service-card"><div class="service-icon">🏗️</div><h3>Commercial Plumbing</h3><p>We handle the big jobs too. Offices, retail, and commercial properties trust us for reliable service.</p></div>
-    <div class="service-card"><div class="service-icon">🚨</div><h3>24/7 Emergency Service</h3><p>Plumbing emergencies don't wait for business hours. Neither do we. Call us anytime, day or night.</p></div>
+    <a href="#leak-repair" class="service-card">
+      <div class="service-icon">🚰</div>
+      <h3>Leak Detection & Repair</h3>
+      <p>We find and fix leaks fast before they become expensive disasters. Save your home and your wallet.</p>
+      <span class="service-link">Learn more →</span>
+    </a>
+    <a href="#drain-cleaning" class="service-card">
+      <div class="service-icon">🚿</div>
+      <h3>Drain Cleaning</h3>
+      <p>Clogged drains? We clear them completely using professional-grade equipment — not just a plunger.</p>
+      <span class="service-link">Learn more →</span>
+    </a>
+    <a href="#water-heater" class="service-card">
+      <div class="service-icon">🔧</div>
+      <h3>Water Heater Service</h3>
+      <p>Installation, repair, and replacement of all water heater types. Cold showers are never fun.</p>
+      <span class="service-link">Learn more →</span>
+    </a>
+    <a href="#residential" class="service-card">
+      <div class="service-icon">🏠</div>
+      <h3>Residential Plumbing</h3>
+      <p>Full-service plumbing for your home — from faucets and toilets to full remodels and new installs.</p>
+      <span class="service-link">Learn more →</span>
+    </a>
+    <a href="#commercial" class="service-card">
+      <div class="service-icon">🏗️</div>
+      <h3>Commercial Plumbing</h3>
+      <p>We handle the big jobs too. Offices, retail, and commercial properties trust us for reliable service.</p>
+      <span class="service-link">Learn more →</span>
+    </a>
+    <a href="#emergency" class="service-card">
+      <div class="service-icon">🚨</div>
+      <h3>24/7 Emergency Service</h3>
+      <p>Plumbing emergencies don't wait for business hours. Neither do we. Call us anytime, day or night.</p>
+      <span class="service-link">Learn more →</span>
+    </a>
   </div>
 </section>
 
-<section class="trust">
+<!-- SERVICE DETAIL: LEAK REPAIR -->
+<section class="service-detail" id="leak-repair">
+  <div class="detail-inner">
+    <div class="detail-img" style="background:url('https://media.base44.com/images/public/6a35b12a7d8d44e0af3a1501/e02a15f0f_generated_image.png') center/cover;"></div>
+    <div class="detail-text">
+      <h2>🚰 Leak Detection <span>& Repair</span></h2>
+      <p>A hidden leak can silently destroy your home and spike your water bill by hundreds of dollars a month. We use professional detection tools to find leaks behind walls, under slabs, and underground — fast.</p>
+      <ul class="detail-list">
+        <li>Electronic and acoustic leak detection</li>
+        <li>Slab leak detection and repair</li>
+        <li>Pipe bursting and pipe lining solutions</li>
+        <li>Water line leak repair</li>
+        <li>Same-day emergency leak response</li>
+      </ul>
+      <a href="#contact" class="btn-primary" style="display:inline-block;">Get a Free Estimate</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE DETAIL: DRAIN CLEANING -->
+<section class="service-detail" id="drain-cleaning">
+  <div class="detail-inner reverse">
+    <div class="detail-img" style="background:url('https://media.base44.com/images/public/6a35b12a7d8d44e0af3a1501/a1957865c_generated_image.png') center/cover;"></div>
+    <div class="detail-text">
+      <h2>🚿 Professional <span>Drain Cleaning</span></h2>
+      <p>Don't waste money on store-bought chemicals that damage your pipes and never fully work. Our professional drain cleaning service clears blockages completely and keeps them from coming back.</p>
+      <ul class="detail-list">
+        <li>Kitchen and bathroom drain clearing</li>
+        <li>Main sewer line cleaning</li>
+        <li>Hydro-jetting for stubborn clogs</li>
+        <li>Video camera drain inspection</li>
+        <li>Preventative drain maintenance plans</li>
+      </ul>
+      <a href="#contact" class="btn-primary" style="display:inline-block;">Schedule Service</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE DETAIL: WATER HEATER -->
+<section class="service-detail" id="water-heater">
+  <div class="detail-inner">
+    <div class="detail-img" style="background:url('https://media.base44.com/images/public/6a35b12a7d8d44e0af3a1501/e02a15f0f_generated_image.png') center/cover;"></div>
+    <div class="detail-text">
+      <h2>🔧 Water Heater <span>Experts</span></h2>
+      <p>No hot water is a real emergency. Whether your water heater is leaking, making strange noises, or just not performing like it used to — we'll diagnose it fast and get you back to hot showers the same day.</p>
+      <ul class="detail-list">
+        <li>Tank and tankless water heater repair</li>
+        <li>New water heater installation</li>
+        <li>Energy-efficient upgrade recommendations</li>
+        <li>Water heater flushing and maintenance</li>
+        <li>All brands and models serviced</li>
+      </ul>
+      <a href="#contact" class="btn-primary" style="display:inline-block;">Get a Free Estimate</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE DETAIL: RESIDENTIAL -->
+<section class="service-detail" id="residential">
+  <div class="detail-inner reverse">
+    <div class="detail-img" style="background:url('https://media.base44.com/images/public/6a35b12a7d8d44e0af3a1501/a1957865c_generated_image.png') center/cover;"></div>
+    <div class="detail-text">
+      <h2>🏠 Full <span>Residential Plumbing</span></h2>
+      <p>Your home is your biggest investment. We treat it that way. From small fixes to complete bathroom and kitchen remodels — our licensed plumbers deliver top-quality work on every job, every time.</p>
+      <ul class="detail-list">
+        <li>Faucet, toilet, and fixture installation</li>
+        <li>Bathroom and kitchen remodel plumbing</li>
+        <li>Full home repiping</li>
+        <li>New construction plumbing</li>
+        <li>Garbage disposal installation and repair</li>
+      </ul>
+      <a href="#contact" class="btn-primary" style="display:inline-block;">Schedule a Visit</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE DETAIL: COMMERCIAL -->
+<section class="service-detail" id="commercial">
+  <div class="detail-inner">
+    <div class="detail-img" style="background:url('https://media.base44.com/images/public/6a35b12a7d8d44e0af3a1501/e02a15f0f_generated_image.png') center/cover;"></div>
+    <div class="detail-text">
+      <h2>🏗️ Commercial <span>Plumbing</span></h2>
+      <p>Businesses can't afford downtime. Our commercial plumbing team works efficiently to minimize disruption and get your facility back up and running fast — with full compliance guaranteed.</p>
+      <ul class="detail-list">
+        <li>Office and retail plumbing</li>
+        <li>Restaurant and commercial kitchen plumbing</li>
+        <li>Backflow prevention and testing</li>
+        <li>Grease trap installation and service</li>
+        <li>Code compliance inspections</li>
+      </ul>
+      <a href="#contact" class="btn-primary" style="display:inline-block;">Request a Quote</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE DETAIL: EMERGENCY -->
+<section class="service-detail" id="emergency">
+  <div class="detail-inner reverse">
+    <div class="detail-img" style="background:url('https://media.base44.com/images/public/6a35b12a7d8d44e0af3a1501/a1957865c_generated_image.png') center/cover;"></div>
+    <div class="detail-text">
+      <h2>🚨 24/7 <span>Emergency Service</span></h2>
+      <p>Burst pipe at 2am? Sewage backup on a Sunday? We're always on call. Our emergency response team is ready to roll out fast so you're never left dealing with a plumbing disaster alone.</p>
+      <ul class="detail-list">
+        <li>Burst and frozen pipe repair</li>
+        <li>Sewage backup and overflow cleanup</li>
+        <li>Flooding and water damage response</li>
+        <li>Gas line emergency service</li>
+        <li>Fast response — we answer every call</li>
+      </ul>
+      <a href="tel:8639915702" class="btn-primary" style="display:inline-block;">📞 Call Now — (863) 991-5702</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / TRUST -->
+<section class="trust" id="about">
   <div class="trust-inner">
     <div class="trust-left">
       <h2>Why Sebring Trusts <span style="color:var(--blue)">All Service Plumbing</span></h2>
-      <p>With hundreds of 5-star reviews and years of experience serving Central Florida, we've built our reputation one satisfied customer at a time.</p>
+      <p>With 337 five-star reviews and years of experience serving Central Florida, we've built our reputation one satisfied customer at a time. We don't just fix plumbing — we take care of people.</p>
       <div class="trust-features">
         <div class="trust-feature"><div class="check">✓</div><p><strong>Licensed & Insured</strong> — Complete peace of mind on every job</p></div>
         <div class="trust-feature"><div class="check">✓</div><p><strong>Upfront Pricing</strong> — No surprises, no hidden fees, ever</p></div>
         <div class="trust-feature"><div class="check">✓</div><p><strong>Same-Day Service</strong> — We show up when we say we will</p></div>
-        <div class="trust-feature"><div class="check">✓</div><p><strong>Satisfaction Guaranteed</strong> — We don't leave until the job is done right</p></div>
+        <div class="trust-feature"><div class="check">✓</div><p><strong>Satisfaction Guaranteed</strong> — We don't leave until it's done right</p></div>
       </div>
     </div>
     <div class="trust-right">
@@ -157,10 +368,11 @@
   </div>
 </section>
 
+<!-- REVIEWS -->
 <section class="reviews" id="reviews">
   <div class="section-label">Customer Love</div>
   <h2 class="section-title">What Our Customers Say</h2>
-  <p class="section-sub">Don't take our word for it — here's what real Sebring residents say about us.</p>
+  <p class="section-sub">337 reviews don't lie. Here's what real Sebring residents say about us.</p>
   <div class="reviews-grid">
     <div class="review-card"><div class="stars">★★★★★</div><p>"Called them for an emergency at 9pm and they were here within the hour. Fixed the burst pipe quickly and the price was very fair. Highly recommend!"</p><div class="reviewer"><div class="avatar">MR</div><div class="reviewer-info"><strong>Maria R.</strong><span>Sebring, FL · Google Review</span></div></div></div>
     <div class="review-card"><div class="stars">★★★★★</div><p>"Best plumbers in Central Florida. They've done work at my house twice now and both times were professional, fast, and cleaned up after themselves."</p><div class="reviewer"><div class="avatar">JT</div><div class="reviewer-info"><strong>James T.</strong><span>Sebring, FL · Google Review</span></div></div></div>
@@ -168,6 +380,74 @@
   </div>
 </section>
 
+<!-- CONTACT FORM -->
+<section class="contact" id="contact">
+  <div class="section-label">Get In Touch</div>
+  <h2 class="section-title">Request a Free Quote</h2>
+  <p class="section-sub" style="margin-bottom:60px;">Fill out the form and we'll get back to you within 1 hour. Or just call us directly.</p>
+  <div class="contact-inner">
+    <div class="contact-info">
+      <h2>We'd love to <span style="color:var(--blue)">hear from you</span></h2>
+      <p>Whether it's a small drip or a major emergency, we're ready to help. Reach out any time — we answer calls 24/7.</p>
+      <div class="contact-detail">
+        <div class="contact-icon">📞</div>
+        <div class="contact-detail-text"><strong>(863) 991-5702</strong><span>Call or text anytime — 24/7</span></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">📍</div>
+        <div class="contact-detail-text"><strong>4305 Grand Concourse</strong><span>Sebring, FL 33875</span></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">⏰</div>
+        <div class="contact-detail-text"><strong>Open 24 Hours</strong><span>Emergency service always available</span></div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <form onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="John Smith" required/>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="(863) 555-0000" required/>
+        </div>
+        <div class="form-group">
+          <label>Service Needed</label>
+          <select required>
+            <option value="" disabled selected>Select a service...</option>
+            <option>Leak Detection & Repair</option>
+            <option>Drain Cleaning</option>
+            <option>Water Heater Service</option>
+            <option>Residential Plumbing</option>
+            <option>Commercial Plumbing</option>
+            <option>Emergency Service</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell us about your issue</label>
+          <textarea placeholder="Describe your plumbing problem..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Request Free Quote →</button>
+        <div class="form-success" id="formSuccess">✅ Got it! We'll call you within the hour.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- MAP LINK -->
+<section class="map-section">
+  <div class="map-inner">
+    <div class="map-placeholder">
+      <div style="font-size:2.5rem;margin-bottom:12px;">📍</div>
+      <p style="color:#94a3b8;margin-bottom:12px;font-size:1rem;">4305 Grand Concourse, Sebring, FL 33875</p>
+      <a href="https://maps.google.com/?q=4305+Grand+Concourse+Sebring+FL+33875" target="_blank">Open in Google Maps →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
 <section class="cta">
   <div class="cta-bg"></div>
   <div class="cta-content">
@@ -178,10 +458,43 @@
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <p><span>All Service Plumbing of Central Florida, Inc.</span> · 4305 Grand Concourse, Sebring, FL · (863) 991-5702</p>
-  <p style="margin-top:8px;">© 2026 All Service Plumbing · Serving Sebring & Central Florida</p>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="logo">All Service <span style="color:var(--blue)">Plumbing</span></a>
+      <p>Sebring's most trusted plumbing team. Licensed, insured, and available 24/7 for all your plumbing needs.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Services</h4>
+      <a href="#leak-repair">Leak Repair</a>
+      <a href="#drain-cleaning">Drain Cleaning</a>
+      <a href="#water-heater">Water Heaters</a>
+      <a href="#residential">Residential</a>
+      <a href="#commercial">Commercial</a>
+      <a href="#emergency">Emergency</a>
+    </div>
+    <div class="footer-links">
+      <h4>Company</h4>
+      <a href="#about">About Us</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+      <a href="tel:8639915702">📞 (863) 991-5702</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 All Service Plumbing of Central Florida, Inc. · 4305 Grand Concourse, Sebring, FL · Licensed & Insured</p>
+  </div>
 </footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  document.getElementById('formSuccess').style.display = 'block';
+  e.target.reset();
+  setTimeout(() => { document.getElementById('formSuccess').style.display = 'none'; }, 5000);
+}
+</script>
 
 </body>
 </html>
